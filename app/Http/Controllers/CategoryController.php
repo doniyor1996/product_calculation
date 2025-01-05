@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\CategoryTypesEnum;
 use App\Http\Attributes\Models\CategorySchema;
 use App\Http\Attributes\Parameters\PathParameter;
 use App\Http\Attributes\Parameters\QueryParameter;
@@ -39,7 +40,7 @@ class CategoryController extends Controller
             ],
             tags: ['Categories'],
             parameters: [
-                new QueryParameter('type'),
+                new QueryParameter('type', CategoryTypesEnum::MATERIAL->value),
             ],
             responses: [
                 new EntityListResponse(CategorySchema::class),

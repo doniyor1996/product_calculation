@@ -1,0 +1,1320 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Rent API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/login": {
+            "post": {
+                "tags": [
+                    "Login"
+                ],
+                "summary": "login",
+                "operationId": "login",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "example": "demo@example.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "demo"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "access_token": {
+                                            "type": "string",
+                                            "example": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/categories": {
+            "get": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Get categories",
+                "operationId": "categories-list-get",
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "example": "material"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "string"
+                                                    },
+                                                    "type": {
+                                                        "type": "string",
+                                                        "enum": [
+                                                            "material",
+                                                            "product"
+                                                        ],
+                                                        "example": "product"
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "example": "2023-06-23 10:10:10"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "string",
+                                                        "example": "2023-06-23 10:10:10"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "page": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "per_page": {
+                                            "type": "integer",
+                                            "example": 30
+                                        },
+                                        "total": {
+                                            "type": "integer",
+                                            "example": 60
+                                        },
+                                        "last_page": {
+                                            "type": "integer",
+                                            "example": 2
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Create category",
+                "operationId": "category-create",
+                "requestBody": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Category name"
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "example": "product"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Entity response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "data": {
+                                            "description": "Entity",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "string"
+                                                },
+                                                "type": {
+                                                    "type": "string",
+                                                    "enum": [
+                                                        "material",
+                                                        "product"
+                                                    ],
+                                                    "example": "product"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "example": "2023-06-23 10:10:10"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "example": "2023-06-23 10:10:10"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/categories/{category}": {
+            "get": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Get category",
+                "operationId": "category-get",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "example": 4
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Entity response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "data": {
+                                            "description": "Entity",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "string"
+                                                },
+                                                "type": {
+                                                    "type": "string",
+                                                    "enum": [
+                                                        "material",
+                                                        "product"
+                                                    ],
+                                                    "example": "product"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "example": "2023-06-23 10:10:10"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "example": "2023-06-23 10:10:10"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Update category",
+                "operationId": "category-update",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "example": 4
+                    }
+                ],
+                "requestBody": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Category name"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Entity response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "data": {
+                                            "description": "Entity",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "string"
+                                                },
+                                                "type": {
+                                                    "type": "string",
+                                                    "enum": [
+                                                        "material",
+                                                        "product"
+                                                    ],
+                                                    "example": "product"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "example": "2023-06-23 10:10:10"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "example": "2023-06-23 10:10:10"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Delete category",
+                "operationId": "category-delete",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "example": 4
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No content response"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/materials": {
+            "get": {
+                "tags": [
+                    "Materials"
+                ],
+                "summary": "Get materials",
+                "operationId": "materials-list-get",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "example": 1
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "example": 30
+                    },
+                    {
+                        "name": "filter[name]",
+                        "in": "query",
+                        "example": "Труба"
+                    },
+                    {
+                        "name": "filter[category_id]",
+                        "in": "query",
+                        "example": "2"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "category_id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "category_name": {
+                                                        "type": "string",
+                                                        "example": "string"
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "string"
+                                                    },
+                                                    "description": {
+                                                        "type": "string",
+                                                        "example": "string"
+                                                    },
+                                                    "price": {
+                                                        "type": "number",
+                                                        "format": "float",
+                                                        "example": 1
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "example": "2023-06-23 10:10:10"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "string",
+                                                        "example": "2023-06-23 10:10:10"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "page": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "per_page": {
+                                            "type": "integer",
+                                            "example": 30
+                                        },
+                                        "total": {
+                                            "type": "integer",
+                                            "example": 60
+                                        },
+                                        "last_page": {
+                                            "type": "integer",
+                                            "example": 2
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Materials"
+                ],
+                "summary": "Material category",
+                "operationId": "materials-create",
+                "requestBody": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "category_id": {
+                                        "type": "string",
+                                        "example": "1"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Name"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Description"
+                                    },
+                                    "price": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 15
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Entity response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "data": {
+                                            "description": "Entity",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "category_id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "category_name": {
+                                                    "type": "string",
+                                                    "example": "string"
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "string"
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "example": "string"
+                                                },
+                                                "price": {
+                                                    "type": "number",
+                                                    "format": "float",
+                                                    "example": 1
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "example": "2023-06-23 10:10:10"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "example": "2023-06-23 10:10:10"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/materials/{material}": {
+            "get": {
+                "tags": [
+                    "Materials"
+                ],
+                "summary": "Get material",
+                "operationId": "material-get",
+                "parameters": [
+                    {
+                        "name": "material",
+                        "in": "path",
+                        "example": 4
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Entity response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "data": {
+                                            "description": "Entity",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "category_id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "category_name": {
+                                                    "type": "string",
+                                                    "example": "string"
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "string"
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "example": "string"
+                                                },
+                                                "price": {
+                                                    "type": "number",
+                                                    "format": "float",
+                                                    "example": 1
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "example": "2023-06-23 10:10:10"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "example": "2023-06-23 10:10:10"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Materials"
+                ],
+                "summary": "Update material",
+                "operationId": "material-update",
+                "parameters": [
+                    {
+                        "name": "material",
+                        "in": "path",
+                        "example": 1
+                    }
+                ],
+                "requestBody": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "category_id": {
+                                        "type": "string",
+                                        "example": "1"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Name"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Description"
+                                    },
+                                    "price": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 15
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Entity response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "data": {
+                                            "description": "Entity",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "category_id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "category_name": {
+                                                    "type": "string",
+                                                    "example": "string"
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "string"
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "example": "string"
+                                                },
+                                                "price": {
+                                                    "type": "number",
+                                                    "format": "float",
+                                                    "example": 1
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "example": "2023-06-23 10:10:10"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "example": "2023-06-23 10:10:10"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Materials"
+                ],
+                "summary": "Delete material",
+                "operationId": "material-delete",
+                "parameters": [
+                    {
+                        "name": "material",
+                        "in": "path",
+                        "example": 4
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No content response"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/products": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Get products",
+                "operationId": "products-list-get",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "example": 1
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "example": 30
+                    },
+                    {
+                        "name": "filter[name]",
+                        "in": "query",
+                        "example": "Мешалка"
+                    },
+                    {
+                        "name": "filter[category_id]",
+                        "in": "query",
+                        "example": "2"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "string"
+                                                    },
+                                                    "description": {
+                                                        "type": "string",
+                                                        "example": "string"
+                                                    },
+                                                    "price": {
+                                                        "type": "number",
+                                                        "format": "float",
+                                                        "example": 15
+                                                    },
+                                                    "cost": {
+                                                        "type": "number",
+                                                        "format": "float",
+                                                        "example": 15
+                                                    },
+                                                    "category_id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "category": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": 1
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "string"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "example": "2023-06-23 10:10:10"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "string",
+                                                        "example": "2023-06-23 10:10:10"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "page": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "per_page": {
+                                            "type": "integer",
+                                            "example": 30
+                                        },
+                                        "total": {
+                                            "type": "integer",
+                                            "example": 60
+                                        },
+                                        "last_page": {
+                                            "type": "integer",
+                                            "example": 2
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Create product",
+                "operationId": "products-create",
+                "requestBody": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Мешалка"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Описание"
+                                    },
+                                    "price": {
+                                        "type": "string",
+                                        "example": "15"
+                                    },
+                                    "cost": {
+                                        "type": "string",
+                                        "example": "2500"
+                                    },
+                                    "category_id": {
+                                        "type": "string",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Entity response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "data": {
+                                            "description": "Entity",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "string"
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "example": "string"
+                                                },
+                                                "price": {
+                                                    "type": "number",
+                                                    "format": "float",
+                                                    "example": 15
+                                                },
+                                                "cost": {
+                                                    "type": "number",
+                                                    "format": "float",
+                                                    "example": 15
+                                                },
+                                                "category_id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "category": {
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "integer",
+                                                            "example": 1
+                                                        },
+                                                        "name": {
+                                                            "type": "string",
+                                                            "example": "string"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "example": "2023-06-23 10:10:10"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "example": "2023-06-23 10:10:10"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/products/{product}": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Get product",
+                "operationId": "products-get",
+                "parameters": [
+                    {
+                        "name": "product",
+                        "in": "path",
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Entity response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "data": {
+                                            "description": "Entity",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "string"
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "example": "string"
+                                                },
+                                                "price": {
+                                                    "type": "number",
+                                                    "format": "float",
+                                                    "example": 15
+                                                },
+                                                "cost": {
+                                                    "type": "number",
+                                                    "format": "float",
+                                                    "example": 15
+                                                },
+                                                "category_id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "category": {
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "integer",
+                                                            "example": 1
+                                                        },
+                                                        "name": {
+                                                            "type": "string",
+                                                            "example": "string"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "example": "2023-06-23 10:10:10"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "example": "2023-06-23 10:10:10"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Update product",
+                "operationId": "products-update",
+                "parameters": [
+                    {
+                        "name": "product",
+                        "in": "path",
+                        "example": 1
+                    }
+                ],
+                "requestBody": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Мешалка"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Описание"
+                                    },
+                                    "price": {
+                                        "type": "string",
+                                        "example": "15"
+                                    },
+                                    "cost": {
+                                        "type": "string",
+                                        "example": "2500"
+                                    },
+                                    "category_id": {
+                                        "type": "string",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Entity response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "data": {
+                                            "description": "Entity",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "string"
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "example": "string"
+                                                },
+                                                "price": {
+                                                    "type": "number",
+                                                    "format": "float",
+                                                    "example": 15
+                                                },
+                                                "cost": {
+                                                    "type": "number",
+                                                    "format": "float",
+                                                    "example": 15
+                                                },
+                                                "category_id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "category": {
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "integer",
+                                                            "example": 1
+                                                        },
+                                                        "name": {
+                                                            "type": "string",
+                                                            "example": "string"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "example": "2023-06-23 10:10:10"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "example": "2023-06-23 10:10:10"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Delete product",
+                "operationId": "product-delete",
+                "parameters": [
+                    {
+                        "name": "product",
+                        "in": "path",
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No content response"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearer": {
+                "type": "http",
+                "name": "bearer",
+                "in": "header",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Login",
+            "description": "Login"
+        },
+        {
+            "name": "Categories",
+            "description": "Categories"
+        },
+        {
+            "name": "Materials",
+            "description": "Materials"
+        },
+        {
+            "name": "Products",
+            "description": "Products"
+        }
+    ]
+}

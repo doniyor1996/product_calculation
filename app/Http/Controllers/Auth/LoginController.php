@@ -26,8 +26,8 @@ class LoginController extends Controller
             operationId: 'login',
             summary: 'login',
             requestBody: new RequestBody(content: new JsonContent(properties: [
-                new StringProperty('email'),
-                new StringProperty('password'),
+                new StringProperty('email', 'demo@example.com'),
+                new StringProperty('password', 'demo'),
             ])),
             tags: ['Login'],
             responses: [

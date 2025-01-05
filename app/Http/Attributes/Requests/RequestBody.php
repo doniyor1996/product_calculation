@@ -20,7 +20,7 @@ class RequestBody extends \OpenApi\Attributes\RequestBody
         $properties = [];
         $examples = $request->examples();
         foreach ($request->rules() as $name => $rules) {
-            $rules = !is_array($rules) ? explode('|', $rules) : $rules;
+            $rules = array_map(fn ($item) => is_string($item) ? explode(':', $item)[0] : $item, !is_array($rules) ? explode('|', $rules) : $rules);
             $properties[] = match (true) {
                 in_array('integer', $rules) => new IntegerProperty($name, $examples[$name] ?? 1),
                 in_array('decimal', $rules) => new FloatProperty($name, $examples[$name] ?? 1.5),
