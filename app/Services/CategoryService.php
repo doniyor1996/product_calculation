@@ -17,10 +17,11 @@ class CategoryService
             ->where('type', $categoryDTO->type)
             ->first();
 
-        if ($category->deleted_at) {
-            $category->restore();
-            return $category;
-        } elseif ($category) {
+        if ($category) {
+            if ($category->deleted_at) {
+                $category->restore();
+                return $category;
+            }
             throw new BadRequestException('Category already exists');
         }
 
