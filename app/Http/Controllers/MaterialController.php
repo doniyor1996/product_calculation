@@ -16,11 +16,11 @@ use App\Http\Resources\MaterialResource;
 use App\Models\Material;
 use App\Services\MaterialService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use OpenApi\Attributes\Delete;
 use OpenApi\Attributes\Get;
 use OpenApi\Attributes\Post;
 use OpenApi\Attributes\Put;
-use Request;
 
 class MaterialController extends Controller
 {

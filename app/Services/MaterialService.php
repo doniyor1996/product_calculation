@@ -23,7 +23,7 @@ class MaterialService
                 ->where('category_id', $materialDTO->categoryId)
                 ->exists()
         ) {
-            throw new BadRequestException('Category already exists');
+            throw new BadRequestException('Material already exists');
         }
 
         return Material::create([
