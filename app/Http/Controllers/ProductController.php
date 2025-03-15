@@ -18,6 +18,7 @@ use App\Http\Requests\ProductListRequest;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Http\Resources\ProductResource;
+use App\Http\Resources\ProductWithMaterialsResource;
 use App\Models\Product;
 use App\Services\ProductService;
 use Illuminate\Http\JsonResponse;
@@ -92,7 +93,7 @@ class ProductController extends Controller
     ]
     public function store(StoreProductRequest $request): JsonResponse
     {
-        return $this->responseSuccess(new ProductResource($this->service->create($request->validated(), $request->user()->id)));
+        return $this->responseSuccess(new ProductWithMaterialsResource($this->service->create($request->validated(), $request->user()->id)));
     }
 
     #[
@@ -114,7 +115,7 @@ class ProductController extends Controller
     ]
     public function show(Product $product)
     {
-        return $this->responseSuccess(new ProductResource($product));
+        return $this->responseSuccess(new ProductWithMaterialsResource($product));
     }
 
     #[
@@ -137,7 +138,7 @@ class ProductController extends Controller
     ]
     public function update(UpdateProductRequest $request, Product $product): JsonResponse
     {
-        return $this->responseSuccess(new ProductResource($this->service->update($product, $request->validated())));
+        return $this->responseSuccess(new ProductWithMaterialsResource($this->service->update($product, $request->validated())));
     }
 
     #[
