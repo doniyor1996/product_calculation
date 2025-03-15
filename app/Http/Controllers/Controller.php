@@ -9,7 +9,7 @@ use OpenApi\Attributes\SecurityScheme;
 
 /**
  * @OA\Info(
- *    title="Rent API",
+ *    title="Calculation API",
  *    version="1.0.0",
  * )
  */

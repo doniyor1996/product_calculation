@@ -1,7 +1,7 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Rent API",
+        "title": "Calculation API",
         "version": "1.0.0"
     },
     "paths": {
@@ -508,7 +508,7 @@
                 "tags": [
                     "Materials"
                 ],
-                "summary": "Material category",
+                "summary": "Create material",
                 "operationId": "materials-create",
                 "requestBody": {
                     "description": "",
@@ -831,7 +831,7 @@
                     {
                         "name": "filter[name]",
                         "in": "query",
-                        "example": "Мешалка"
+                        "example": "Стул"
                     },
                     {
                         "name": "filter[category_id]",
@@ -941,30 +941,43 @@
                 "summary": "Create product",
                 "operationId": "products-create",
                 "requestBody": {
-                    "description": "",
                     "content": {
                         "application/json": {
                             "schema": {
                                 "properties": {
                                     "name": {
                                         "type": "string",
-                                        "example": "Мешалка"
+                                        "example": "string"
                                     },
                                     "description": {
                                         "type": "string",
-                                        "example": "Описание"
+                                        "example": "string"
                                     },
                                     "price": {
-                                        "type": "string",
-                                        "example": "15"
-                                    },
-                                    "cost": {
-                                        "type": "string",
-                                        "example": "2500"
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 1
                                     },
                                     "category_id": {
-                                        "type": "string",
-                                        "example": "1"
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "materials": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "material_id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "quantity": {
+                                                    "type": "number",
+                                                    "format": "float",
+                                                    "example": 1
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
                                     }
                                 },
                                 "type": "object"
@@ -1162,23 +1175,32 @@
                                 "properties": {
                                     "name": {
                                         "type": "string",
-                                        "example": "Мешалка"
+                                        "example": "string"
                                     },
                                     "description": {
                                         "type": "string",
-                                        "example": "Описание"
+                                        "example": "string"
                                     },
                                     "price": {
                                         "type": "string",
-                                        "example": "15"
-                                    },
-                                    "cost": {
-                                        "type": "string",
-                                        "example": "2500"
+                                        "example": "string"
                                     },
                                     "category_id": {
                                         "type": "string",
-                                        "example": "1"
+                                        "example": "string"
+                                    },
+                                    "materials.*": {
+                                        "type": "string",
+                                        "example": "string"
+                                    },
+                                    "materials.*.material_id": {
+                                        "type": "string",
+                                        "example": "string"
+                                    },
+                                    "materials.*.quantity": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 1.5
                                     }
                                 },
                                 "type": "object"

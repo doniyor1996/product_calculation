@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MaterialController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['as' => 'api.'], function () {
@@ -13,6 +14,7 @@ Route::group(['as' => 'api.'], function () {
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::resource('categories', CategoryController::class);
+    Route::resource('products', ProductController::class);
     Route::resource('materials', MaterialController::class);
 
     Route::post('/logout', [LoginController::class, 'logout'])

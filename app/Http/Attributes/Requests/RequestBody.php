@@ -18,7 +18,7 @@ class RequestBody extends \OpenApi\Attributes\RequestBody
         $request = new $requestClass();
 
         $properties = [];
-        $examples = $request->examples();
+        $examples = method_exists($request, 'examples') ? $request->examples() : [];
         foreach ($request->rules() as $name => $rules) {
             $rules = array_map(fn ($item) => is_string($item) ? explode(':', $item)[0] : $item, !is_array($rules) ? explode('|', $rules) : $rules);
             $properties[] = match (true) {

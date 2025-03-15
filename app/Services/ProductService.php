@@ -6,6 +6,7 @@ use App\Enums\CategoryTypesEnum;
 use App\Exceptions\BadRequestException;
 use App\Models\Category;
 use App\Models\Product;
+use DB;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
@@ -20,8 +21,25 @@ class ProductService
             );
         }
 
-        return Product::create($data + [
-            'user_id' => $userId,
+        $product = DB::transaction(function () use ($userId, $data) {
+            $product = Product::create([
+                'user_id' => $userId,
+                'category_id' => $data['category_id'],
+                'name' => $data['name'],
+                'price' => $data['price'],
+                'description' => $data['description'],
+            ]);
+
+            foreach ($data['materials'] as $material) {
+                $product->materials()->attach($material['material_id'], ['quantity' => $material['quantity']]);
+            }
+
+            return $product;
+        });
+
+        return $product->load([
+            'category',
+            'materials'
         ]);
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -25,5 +26,16 @@ class Product extends Model
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function materials(): BelongsToMany
+    {
+        return $this->belongsToMany(Material::class)
+            ->withPivot('quantity');
+    }
+
+    protected function cost(): Attribute
+    {
+        return Attribute::get(fn() => array_sum($this->materials->map(fn(Material $material) => $material->price * $material->pivot->quantity)->toArray()));
     }
 }

@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use App\Interfaces\SwaggerRequest;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreProductRequest extends FormRequest implements SwaggerRequest
+class StoreProductRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,19 +26,10 @@ class StoreProductRequest extends FormRequest implements SwaggerRequest
             'name' => 'required',
             'description' => 'nullable|string|max:255',
             'price' => 'required|numeric',
-            'cost' => 'required|numeric',
             'category_id' => 'required|exists:categories,id',
-        ];
-    }
-
-    public function examples(): array
-    {
-        return [
-            'name' => 'Мешалка',
-            'description' => 'Описание',
-            'price' => 15.0,
-            'cost' => 2500.0,
-            'category_id' => 1,
+            'materials.*' => 'required|array',
+            'materials.*.material_id' => 'required|exists:materials,id',
+            'materials.*.quantity' => 'required|decimal:0,2',
         ];
     }
 }

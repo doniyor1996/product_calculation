@@ -6,6 +6,10 @@ use App\Http\Attributes\Models\ProductSchema;
 use App\Http\Attributes\Parameters\FilterParameter;
 use App\Http\Attributes\Parameters\PageParameter;
 use App\Http\Attributes\Parameters\PathParameter;
+use App\Http\Attributes\Properties\ArrayProperty;
+use App\Http\Attributes\Properties\FloatProperty;
+use App\Http\Attributes\Properties\IntegerProperty;
+use App\Http\Attributes\Properties\StringProperty;
 use App\Http\Attributes\Requests\RequestBody;
 use App\Http\Attributes\Responses\EntityListResponse;
 use App\Http\Attributes\Responses\EntityResponse;
@@ -19,6 +23,7 @@ use App\Services\ProductService;
 use Illuminate\Http\JsonResponse;
 use OpenApi\Attributes\Delete;
 use OpenApi\Attributes\Get;
+use OpenApi\Attributes\JsonContent;
 use OpenApi\Attributes\Post;
 use OpenApi\Attributes\Put;
 
@@ -42,7 +47,7 @@ class ProductController extends Controller
             parameters: [
                 new PageParameter(),
                 new PageParameter('per_page', 30),
-                new FilterParameter('name', 'Мешалка'),
+                new FilterParameter('name', 'Стул'),
                 new FilterParameter('category_id', 2),
             ],
             responses: [
@@ -65,7 +70,20 @@ class ProductController extends Controller
             security: [
                 ['bearer' => []]
             ],
-            requestBody: new RequestBody(StoreProductRequest::class),
+            requestBody: new \OpenApi\Attributes\RequestBody(
+                content: new JsonContent(
+                    properties: [
+                        new StringProperty('name'),
+                        new StringProperty('description'),
+                        new FloatProperty('price'),
+                        new IntegerProperty('category_id'),
+                        new ArrayProperty('materials', [
+                            new IntegerProperty('material_id'),
+                            new FloatProperty('quantity'),
+                        ]),
+                    ],
+                )
+            ),
             tags: ['Products'],
             responses: [
                 new EntityResponse(ProductSchema::class),
