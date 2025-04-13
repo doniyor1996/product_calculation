@@ -27,7 +27,7 @@ class StoreProductRequest extends FormRequest
             'description' => 'nullable|string|max:255',
             'price' => 'required|numeric',
             'category_id' => 'required|exists:categories,id',
-            'materials.*' => 'required|array',
+            'materials' => 'required|array',
             'materials.*.material_id' => 'required|exists:materials,id',
             'materials.*.quantity' => 'required|decimal:0,2',
         ];
